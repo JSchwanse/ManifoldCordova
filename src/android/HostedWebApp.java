@@ -31,8 +31,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
-* This class manipulates the Web App W3C manifest.
-*/
+ * This class manipulates the Web App W3C manifest.
+ */
 public class HostedWebApp extends CordovaPlugin {
     private static final String LOG_TAG = "HostedWebApp";
     private static final String DEFAULT_MANIFEST_FILE = "manifest.json";
@@ -54,7 +54,7 @@ public class HostedWebApp extends CordovaPlugin {
     @Override
     public void pluginInitialize() {
         final HostedWebApp me = HostedWebApp.this;
-        this.activity = (CordovaActivity)this.cordova.getActivity();
+        this.activity = (CordovaActivity) this.cordova.getActivity();
 
         // Load default manifest file.
         this.loadingManifest = true;
@@ -161,9 +161,9 @@ public class HostedWebApp extends CordovaPlugin {
             return true;
         }
 
-		if (action.equals("injectPluginScript")) {
-			final List<String> scripts = new ArrayList<String>();
-			scripts.add(args.getString(0));
+        if (action.equals("injectPluginScript")) {
+            final List<String> scripts = new ArrayList<String>();
+            scripts.add(args.getString(0));
 
             cordova.getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -178,7 +178,7 @@ public class HostedWebApp extends CordovaPlugin {
             });
 
             return true;
-		}
+        }
 
         return false;
     }
@@ -205,8 +205,7 @@ public class HostedWebApp extends CordovaPlugin {
                     e.printStackTrace();
                 }
             }
-        }
-        else if (id.equals("onPageFinished")) {
+        } else if (id.equals("onPageFinished")) {
             if (!this.isConnectionError) {
                 this.hideOfflineOverlay();
             }
@@ -412,9 +411,9 @@ public class HostedWebApp extends CordovaPlugin {
         }
 
         webView.setLayoutParams(new LinearLayout.LayoutParams(
-                                                 ViewGroup.LayoutParams.MATCH_PARENT,
-                                                 ViewGroup.LayoutParams.MATCH_PARENT,
-                                                 1.0F));
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                1.0F));
         return webView;
     }
 
@@ -423,9 +422,9 @@ public class HostedWebApp extends CordovaPlugin {
         root.setOrientation(LinearLayout.VERTICAL);
         root.setVisibility(View.INVISIBLE);
         root.setLayoutParams(new LinearLayout.LayoutParams(
-                                              ViewGroup.LayoutParams.MATCH_PARENT,
-                                              ViewGroup.LayoutParams.MATCH_PARENT,
-                                              0.0F));
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                0.0F));
         return root;
     }
 
@@ -491,7 +490,7 @@ public class HostedWebApp extends CordovaPlugin {
         return null;
     }
 
-	private void injectScripts(final List<String> files, final ValueCallback<String> resultCallback) {
+    private void injectScripts(final List<String> files, final ValueCallback<String> resultCallback) {
         final HostedWebApp me = this;
 
         this.cordova.getThreadPool().execute(new Runnable() {
@@ -548,7 +547,7 @@ public class HostedWebApp extends CordovaPlugin {
                         View webView = me.webView.getEngine().getView();
 
                         try {
-                            Method evaluateJavaScriptMethod = webView.getClass().getMethod("evaluateJavascript", new Class[]{ String.class, (Class<ValueCallback<String>>)(Class<?>)ValueCallback.class });
+                            Method evaluateJavaScriptMethod = webView.getClass().getMethod("evaluateJavascript", new Class[]{String.class, (Class<ValueCallback<String>>) (Class<?>) ValueCallback.class});
                             evaluateJavaScriptMethod.invoke(webView, scriptToInject, resultCallback);
                         } catch (Exception e) {
                             Log.v(LOG_TAG, String.format("WARNING: Webview does not support 'evaluateJavascript' method. Webview type: '%s'", webView.getClass().getName()));

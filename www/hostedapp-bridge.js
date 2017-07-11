@@ -29,7 +29,7 @@
                         var callbackId = 0;
                         if (success || fail) {
                             callbackId = service + cordova.callbackId++;
-                            cordova.callbacks[callbackId] = { success: success, fail: fail };
+                            cordova.callbacks[callbackId] = {success: success, fail: fail};
                         }
 
                         command += '&callbackId=' + encodeURIComponent(callbackId);
@@ -46,7 +46,7 @@
             if (platform === 'ios') {
                 var exec = cordova.require('cordova/exec');
                 if (exec.setJsToNativeBridgeMode && exec.jsToNativeModes && exec.jsToNativeModes.XHR_OPTIONAL_PAYLOAD) {
-                    exec.setJsToNativeBridgeMode(exec.jsToNativeModes.XHR_OPTIONAL_PAYLOAD);                    
+                    exec.setJsToNativeBridgeMode(exec.jsToNativeModes.XHR_OPTIONAL_PAYLOAD);
                 }
             }
 
@@ -87,17 +87,17 @@
                 if (pluginMode === 'client') {
                     return cordova.require('cordova/exec')(function (result) {
 
-                        // native side did not handle the script--using default mechanism
-                        if (!result) {
-                            return defaultInjectScript(url, onloadHandler, onerrorHandler);
-                        }
+                            // native side did not handle the script--using default mechanism
+                            if (!result) {
+                                return defaultInjectScript(url, onloadHandler, onerrorHandler);
+                            }
 
-                        onloadHandler();
-                    },
-                    function (err) {
-                        onerrorHandler(err);
-                    },
-                    'HostedWebApp', 'injectPluginScript', [url]);
+                            onloadHandler();
+                        },
+                        function (err) {
+                            onerrorHandler(err);
+                        },
+                        'HostedWebApp', 'injectPluginScript', [url]);
                 }
 
                 if (pluginMode === 'server') {
