@@ -38,7 +38,7 @@ function copyFile(source, target, callback) {
         done();
     });
     rd.pipe(wr);
-};
+}
 
 function updateManifestFile(manifestPath) {
     var contents = fs.readFileSync(manifestPath, 'utf-8');
@@ -58,25 +58,23 @@ function updateManifestFile(manifestPath) {
 }
 
 function updateWindowsManifests() {
-    var MANIFEST_WINDOWS8 = 'package.windows80.appxmanifest',
-        MANIFEST_WINDOWS = 'package.windows.appxmanifest',
-        MANIFEST_PHONE = 'package.phone.appxmanifest',
-        MANIFEST_WINDOWS10 = 'package.windows10.appxmanifest';
+    var WINDOWS_MANIFESTS = {
+        MANIFEST_WINDOWS8: 'package.windows80.appxmanifest',
+        MANIFEST_WINDOWS: 'package.windows.appxmanifest',
+        MANIFEST_PHONE: 'package.phone.appxmanifest',
+        MANIFEST_WINDOWS10: 'package.windows10.appxmanifest'
+    };
 
     // Apply appxmanifest changes
-    [MANIFEST_WINDOWS,
-        MANIFEST_WINDOWS8,
-        MANIFEST_PHONE,
-        MANIFEST_WINDOWS10].forEach(
-        function (manifestFile) {
-            updateManifestFile(path.join(projectRoot, "platforms", "windows", manifestFile));
-        });
+    for (var manifestFile in WINDOWS_MANIFESTS){
+        updateManifestFile(path.join(projectRoot, "platforms", "windows", WINDOWS_MANIFESTS[manifestFile]));
+    }
 }
 
 module.exports = function (context) {
     projectRoot = context.opts.projectRoot;
 
-    // if the windows folder does not exist, cancell the script
+    // if the windows folder does not exist, cancel the script
     var windowsPath = path.join(projectRoot, "platforms", "windows");
     if (!fs.existsSync(windowsPath)) {
         return;

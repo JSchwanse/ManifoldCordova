@@ -6,9 +6,7 @@ var createConfigParser = require('./createConfigParser'),
     url = require('url'),
     pendingTasks = [],
     Q,
-    config,
-    projectRoot,
-    etree;
+    config;
 
 var logger = {
     log: function () {
@@ -50,7 +48,7 @@ function configureParser(context) {
         ConfigParser = context.requireCordovaModule('cordova-lib/src/configparser/ConfigParser');
     }
 
-    etree = context.requireCordovaModule('cordova-lib/node_modules/elementtree');
+    var etree = context.requireCordovaModule('cordova-lib/node_modules/elementtree');
 
     var xml = cordova_util.projectConfig(context.opts.projectRoot);
     config = createConfigParser(xml, etree, ConfigParser);
@@ -64,7 +62,7 @@ module.exports = function (context) {
 
     var projectRoot = context.opts.projectRoot;
 
-    // if the windows folder does not exist, cancell the script
+    // if the windows folder does not exist, cancel the script
     var windowsPath = path.join(projectRoot, "platforms", "windows");
     if (!fs.existsSync(windowsPath)) {
         return;
