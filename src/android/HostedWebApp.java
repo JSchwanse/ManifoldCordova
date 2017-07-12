@@ -163,11 +163,12 @@ public class HostedWebApp extends CordovaPlugin {
         }
 
         if (action.equals("connectToWebapp")) {
-            
+            final String contentUrl = args.getString(0);
+
             cordova.getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    me.activity.loadUrl(args.getString(0));
+                    me.activity.loadUrl(contentUrl);
                 }
             });
 
