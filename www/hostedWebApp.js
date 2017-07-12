@@ -10,7 +10,13 @@ var hostedwebapp = {
     },
     disableOfflinePage: function () {
         cordova.exec(undefined, undefined, "HostedWebApp", "disableOfflinePage", []);
+    },
+    connectToWebapp: function(url, successCallback, errorCallback){
+        cordova.exec(successCallback, errorCallback, 'HostedWebApp', 'connectToWebapp', [url]);
+    },
+    injectScript: function(pathToScript, successCallback, errorCallback){
+        cordova.exec(successCallback, errorCallback, 'HostedWebApp', 'injectPluginScript', [pathToScript]);
     }
-}
+};
 
 module.exports = hostedwebapp;

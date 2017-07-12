@@ -105,6 +105,7 @@ public class HostedWebApp extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         final HostedWebApp me = HostedWebApp.this;
+
         if (action.equals("getManifest")) {
             if (this.manifestObject != null) {
                 callbackContext.success(manifestObject.toString());
@@ -159,6 +160,15 @@ public class HostedWebApp extends CordovaPlugin {
         if (action.equals("disableOfflinePage")) {
             this.offlineOverlayEnabled = false;
             return true;
+        }
+
+        if (action.equals("connectToWebapp")) {
+            cordova.getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    cordova.getActivity().loadUrl(args.getString(0));
+                }
+            })
         }
 
         if (action.equals("injectPluginScript")) {
