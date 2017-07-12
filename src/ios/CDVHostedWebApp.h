@@ -27,6 +27,8 @@
 
 - (void)disableOfflinePage:(CDVInvokedUrlCommand*)command;
 
+- (void)connectToWebapp:(CDVInvokedUrlCommand*)command
+
 - (void)injectPluginScript:(CDVInvokedUrlCommand*)command;
 
 @end

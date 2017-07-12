@@ -163,6 +163,17 @@ static NSString* const defaultManifestFileName = @"manifest.json";
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+// connects to another url, keeping the cordova plugins functionality
+- (void)connectToWebapp:(CDVInvokedUrlCommand*)command
+{
+    NSURL* contentUrl = [NSURL URLWithString:[command.arguments objectAtIndex:0]];
+    [(UIWebView*)self.webView loadRequest:[NSURLRequest requestWithURL:contentUrl]];
+
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:true];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+// injects a script from the app package into the web view
 - (void)injectPluginScript:(CDVInvokedUrlCommand*)command
 {    
     NSArray* scriptList = @[[command.arguments objectAtIndex:0]];
