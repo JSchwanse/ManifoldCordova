@@ -168,7 +168,7 @@ public class HostedWebApp extends CordovaPlugin {
                 public void run() {
                     cordova.getActivity().loadUrl(args.getString(0));
                 }
-            })
+            });
         }
 
         if (action.equals("injectPluginScript")) {
